@@ -4,7 +4,7 @@ Command line runner for the Music Recommender Simulation.
 Run with: python -m src.main
 """
 
-from src.recommender import load_songs, recommend_songs, WEIGHTS
+from src.recommender import load_songs, recommend_songs, format_table, MODES, WEIGHTS
 
 PROFILES = {
     "High-Energy Pop": {"genre": "pop", "mood": "happy", "energy": 0.8},
@@ -16,16 +16,19 @@ PROFILES = {
     "Unknown genre (bossa nova)": {"genre": "bossa nova", "mood": "relaxed", "energy": 0.5},
 }
 
+# Uses the extended attributes: popularity, decade, mood tags, language, explicit.
+EXTENDED = {"genre": "synthwave", "mood": "moody", "energy": 0.7, "popularity": 70,
+            "decade": 1980, "tags": ["nostalgic", "neon", "driving"],
+            "language": "english", "allow_explicit": False}
+
 # Experiment: halve genre weight, double energy weight
 SHIFTED = {**WEIGHTS, "genre": 1.0, "energy": 2.0}
 
 
-def show(name: str, prefs: dict, songs: list, weights: dict = None, k: int = 5) -> None:
+def show(name: str, prefs: dict, songs: list, k: int = 5, **kwargs) -> None:
     print(f"\n=== {name} ===")
     print(f"Profile: {prefs}")
-    for i, (song, score, why) in enumerate(recommend_songs(prefs, songs, k, weights), 1):
-        print(f"{i}. {song['title']} by {song['artist']} [{song['genre']}/{song['mood']}] - {score:.2f}")
-        print(f"   Because: {why}")
+    print(format_table(recommend_songs(prefs, songs, k, **kwargs)))
 
 
 def main() -> None:
@@ -36,7 +39,18 @@ def main() -> None:
 
     print("\n\n##### EXPERIMENT: genre weight 2.0 -> 1.0, energy weight 1.0 -> 2.0 #####")
     for name in ("High-Energy Pop", "Conflicted (classical + angry + max energy)"):
-        show(name + " (shifted weights)", PROFILES[name], songs, SHIFTED)
+        show(name + " (shifted weights)", PROFILES[name], songs, weights=SHIFTED)
+
+    print("\n\n##### CHALLENGE 1: extended attributes #####")
+    show("Retro synthwave fan (decade, tags, popularity, no explicit)", EXTENDED, songs)
+
+    print("\n\n##### CHALLENGE 2: scoring modes (Strategy pattern) #####")
+    for mode in MODES:
+        show(f"High-Energy Pop, mode={mode}", PROFILES["High-Energy Pop"], songs, mode=mode)
+
+    print("\n\n##### CHALLENGE 3: diversity penalty #####")
+    show("Chill Lofi, no diversity", PROFILES["Chill Lofi"], songs)
+    show("Chill Lofi, diversity=True", PROFILES["Chill Lofi"], songs, diversity=True)
 
 
 if __name__ == "__main__":

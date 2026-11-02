@@ -10,19 +10,24 @@
 
 **What task did you give the agent?**
 
-<!-- Describe the goal you asked the agent to accomplish -->
+Challenge 1: add 5+ new song attributes to the dataset and make the scoring use them. (Claude Code was also used to implement Challenges 2-4 in the same session.)
 
 **Prompts used:**
 
-<!-- Paste the key prompts you gave the agent -->
+> "implement the optional extensions and do a commit"
+
+(The extension text from the course instructions had been pasted into the session earlier.)
 
 **What did the agent generate or change?**
 
-<!-- List the files edited, code generated, or commands run -->
+- `data/songs.csv`: added `popularity`, `release_decade`, `mood_tags`, `language`, `explicit` for all 20 songs. The values were invented by the agent, not taken from real data.
+- `src/recommender.py`: rewrote scoring to a single dict-based `score_song` that handles the new attributes; `Song` and `UserProfile` got optional fields with defaults so the original tests still construct them.
+- `src/main.py`, `tests/test_recommender.py`, `README.md`: demo output, 5 new tests, docs.
+- Commands run: `python -m src.main`, `pytest`.
 
 **What did you verify or fix manually?**
 
-<!-- Describe anything the agent got wrong or that required human review -->
+Checked by running the code, not just reading it: `pytest` passes (7 tests), and the printed reasons show each new rule firing (decade, tags, popularity, language, explicit). Things to review by hand: the invented attribute values (e.g. the decade for "Moonlit Sonata" is set to 1800 as a stand-in, which only matters for the decade rule), and one odd result in the extended demo, where "Island Drift" ranks #3 for a synthwave fan purely because of decade, popularity and language. That is the scoring behaving as written, but it shows the new weights can add noise.
 
 ---
 
@@ -32,12 +37,12 @@
 
 **Which design pattern did you use?**
 
-<!-- e.g., Strategy, Factory, Observer, etc. -->
+Strategy.
 
 **How did AI help you brainstorm or implement it?**
 
-<!-- Describe the conversation or suggestions that led to your decision -->
+Claude Code proposed treating a scoring mode as a named set of weights, with one shared scoring function, instead of separate scoring functions per mode. That keeps the code modular: adding a mode is one dictionary entry and no change to scoring logic.
 
 **How does the pattern appear in your final code?**
 
-<!-- Point to the relevant class or method -->
+`ScoringMode` and the `MODES` registry in `src/recommender.py`; `recommend_songs(..., mode=...)` looks up the strategy and passes its weights to `score_song`. `src/main.py` loops over `MODES` to compare them.

@@ -87,88 +87,117 @@ You can add more tests in `tests/test_recommender.py`.
 
 Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
 
-Output of `python -m src.main` for the five profiles (the default pop/happy profile is first):
+Output of `python -m src.main` for the six profiles (the default pop/happy profile is first):
 
 ```
 Loaded songs: 20
 
 === High-Energy Pop ===
 Profile: {'genre': 'pop', 'mood': 'happy', 'energy': 0.8}
-1. Sunrise City by Neon Echo [pop/happy] - 3.98
-   Because: genre match (pop) +2.0; mood match (happy) +1.0; energy 0.82 vs target 0.80 +0.98
-2. Gym Hero by Max Pulse [pop/intense] - 2.87
-   Because: genre match (pop) +2.0; energy 0.93 vs target 0.80 +0.87
-3. Rooftop Lights by Indigo Parade [indie pop/happy] - 1.96
-   Because: mood match (happy) +1.0; energy 0.76 vs target 0.80 +0.96
-4. Glass Skyline by Neon Echo [synthwave/happy] - 1.90
-   Because: mood match (happy) +1.0; energy 0.70 vs target 0.80 +0.90
-5. Concrete Bars by Kilo Tide [hip hop/confident] - 0.98
-   Because: energy 0.78 vs target 0.80 +0.98
++---+----------------+---------------+-------+------------------------------------------------------------+
+| # | Title          | Artist        | Score | Reasons                                                    |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 1 | Sunrise City   | Neon Echo     | 3.98  | genre match (pop) +2.00; mood match (happy) +1.00;         |
+|   |                |               |       | energy 0.82 vs target 0.80 +0.98                           |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 2 | Gym Hero       | Max Pulse     | 2.87  | genre match (pop) +2.00; energy 0.93 vs target 0.80 +0.87  |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 3 | Rooftop Lights | Indigo Parade | 1.96  | mood match (happy) +1.00; energy 0.76 vs target 0.80 +0.96 |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 4 | Glass Skyline  | Neon Echo     | 1.90  | mood match (happy) +1.00; energy 0.70 vs target 0.80 +0.90 |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 5 | Concrete Bars  | Kilo Tide     | 0.98  | energy 0.78 vs target 0.80 +0.98                           |
++---+----------------+---------------+-------+------------------------------------------------------------+
 
 === Chill Lofi ===
 Profile: {'genre': 'lofi', 'mood': 'chill', 'energy': 0.4, 'likes_acoustic': True}
-1. Library Rain by Paper Lanterns [lofi/chill] - 4.38
-   Because: genre match (lofi) +2.0; mood match (chill) +1.0; energy 0.35 vs target 0.40 +0.95; acoustic fit +0.43
-2. Midnight Coding by LoRoom [lofi/chill] - 4.33
-   Because: genre match (lofi) +2.0; mood match (chill) +1.0; energy 0.42 vs target 0.40 +0.98; acoustic fit +0.35
-3. Focus Flow by LoRoom [lofi/focused] - 3.39
-   Because: genre match (lofi) +2.0; energy 0.40 vs target 0.40 +1.00; acoustic fit +0.39
-4. Afterhours Haze by LoRoom [lofi/moody] - 3.35
-   Because: genre match (lofi) +2.0; energy 0.38 vs target 0.40 +0.98; acoustic fit +0.37
-5. Spacewalk Thoughts by Orbit Bloom [ambient/chill] - 2.34
-   Because: mood match (chill) +1.0; energy 0.28 vs target 0.40 +0.88; acoustic fit +0.46
++---+--------------------+----------------+-------+-------------------------------------------------------------+
+| # | Title              | Artist         | Score | Reasons                                                     |
++---+--------------------+----------------+-------+-------------------------------------------------------------+
+| 1 | Library Rain       | Paper Lanterns | 4.38  | genre match (lofi) +2.00; mood match (chill) +1.00;         |
+|   |                    |                |       | energy 0.35 vs target 0.40 +0.95; acoustic fit +0.43        |
++---+--------------------+----------------+-------+-------------------------------------------------------------+
+| 2 | Midnight Coding    | LoRoom         | 4.33  | genre match (lofi) +2.00; mood match (chill) +1.00;         |
+|   |                    |                |       | energy 0.42 vs target 0.40 +0.98; acoustic fit +0.35        |
++---+--------------------+----------------+-------+-------------------------------------------------------------+
+| 3 | Focus Flow         | LoRoom         | 3.39  | genre match (lofi) +2.00; energy 0.40 vs target 0.40 +1.00; |
+|   |                    |                |       | acoustic fit +0.39                                          |
++---+--------------------+----------------+-------+-------------------------------------------------------------+
+| 4 | Afterhours Haze    | LoRoom         | 3.35  | genre match (lofi) +2.00; energy 0.38 vs target 0.40 +0.98; |
+|   |                    |                |       | acoustic fit +0.37                                          |
++---+--------------------+----------------+-------+-------------------------------------------------------------+
+| 5 | Spacewalk Thoughts | Orbit Bloom    | 2.34  | mood match (chill) +1.00; energy 0.28 vs target 0.40 +0.88; |
+|   |                    |                |       | acoustic fit +0.46                                          |
++---+--------------------+----------------+-------+-------------------------------------------------------------+
 
 === Deep Intense Rock ===
 Profile: {'genre': 'rock', 'mood': 'intense', 'energy': 0.92}
-1. Storm Runner by Voltline [rock/intense] - 3.99
-   Because: genre match (rock) +2.0; mood match (intense) +1.0; energy 0.91 vs target 0.92 +0.99
-2. Gym Hero by Max Pulse [pop/intense] - 1.99
-   Because: mood match (intense) +1.0; energy 0.93 vs target 0.92 +0.99
-3. Neon Cathedral by Voltline [edm/euphoric] - 0.97
-   Because: energy 0.95 vs target 0.92 +0.97
-4. Broken Amps by Static Youth [punk/angry] - 0.96
-   Because: energy 0.96 vs target 0.92 +0.96
-5. Sunrise City by Neon Echo [pop/happy] - 0.90
-   Because: energy 0.82 vs target 0.92 +0.90
++---+----------------+--------------+-------+-------------------------------------------------------+
+| # | Title          | Artist       | Score | Reasons                                               |
++---+----------------+--------------+-------+-------------------------------------------------------+
+| 1 | Storm Runner   | Voltline     | 3.99  | genre match (rock) +2.00; mood match (intense) +1.00; |
+|   |                |              |       | energy 0.91 vs target 0.92 +0.99                      |
++---+----------------+--------------+-------+-------------------------------------------------------+
+| 2 | Gym Hero       | Max Pulse    | 1.99  | mood match (intense) +1.00;                           |
+|   |                |              |       | energy 0.93 vs target 0.92 +0.99                      |
++---+----------------+--------------+-------+-------------------------------------------------------+
+| 3 | Neon Cathedral | Voltline     | 0.97  | energy 0.95 vs target 0.92 +0.97                      |
++---+----------------+--------------+-------+-------------------------------------------------------+
+| 4 | Broken Amps    | Static Youth | 0.96  | energy 0.96 vs target 0.92 +0.96                      |
++---+----------------+--------------+-------+-------------------------------------------------------+
+| 5 | Sunrise City   | Neon Echo    | 0.90  | energy 0.82 vs target 0.92 +0.90                      |
++---+----------------+--------------+-------+-------------------------------------------------------+
 
 === Conflicted (classical + angry + max energy) ===
 Profile: {'genre': 'classical', 'mood': 'angry', 'energy': 0.95}
-1. Moonlit Sonata by Elise Arden [classical/peaceful] - 2.23
-   Because: genre match (classical) +2.0; energy 0.18 vs target 0.95 +0.23
-2. Broken Amps by Static Youth [punk/angry] - 1.99
-   Because: mood match (angry) +1.0; energy 0.96 vs target 0.95 +0.99
-3. Neon Cathedral by Voltline [edm/euphoric] - 1.00
-   Because: energy 0.95 vs target 0.95 +1.00
-4. Gym Hero by Max Pulse [pop/intense] - 0.98
-   Because: energy 0.93 vs target 0.95 +0.98
-5. Storm Runner by Voltline [rock/intense] - 0.96
-   Because: energy 0.91 vs target 0.95 +0.96
++---+----------------+--------------+-------+------------------------------------------------------------+
+| # | Title          | Artist       | Score | Reasons                                                    |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 1 | Moonlit Sonata | Elise Arden  | 2.23  | genre match (classical) +2.00;                             |
+|   |                |              |       | energy 0.18 vs target 0.95 +0.23                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 2 | Broken Amps    | Static Youth | 1.99  | mood match (angry) +1.00; energy 0.96 vs target 0.95 +0.99 |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 3 | Neon Cathedral | Voltline     | 1.00  | energy 0.95 vs target 0.95 +1.00                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 4 | Gym Hero       | Max Pulse    | 0.98  | energy 0.93 vs target 0.95 +0.98                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 5 | Storm Runner   | Voltline     | 0.96  | energy 0.91 vs target 0.95 +0.96                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
 
 === Conflicted (sad + max energy) ===
 Profile: {'genre': 'pop', 'mood': 'sad', 'energy': 0.9}
-1. Gym Hero by Max Pulse [pop/intense] - 2.97
-   Because: genre match (pop) +2.0; energy 0.93 vs target 0.90 +0.97
-2. Sunrise City by Neon Echo [pop/happy] - 2.92
-   Because: genre match (pop) +2.0; energy 0.82 vs target 0.90 +0.92
-3. Storm Runner by Voltline [rock/intense] - 0.99
-   Because: energy 0.91 vs target 0.90 +0.99
-4. Neon Cathedral by Voltline [edm/euphoric] - 0.95
-   Because: energy 0.95 vs target 0.90 +0.95
-5. Broken Amps by Static Youth [punk/angry] - 0.94
-   Because: energy 0.96 vs target 0.90 +0.94
++---+----------------+--------------+-------+-----------------------------------------------------------+
+| # | Title          | Artist       | Score | Reasons                                                   |
++---+----------------+--------------+-------+-----------------------------------------------------------+
+| 1 | Gym Hero       | Max Pulse    | 2.97  | genre match (pop) +2.00; energy 0.93 vs target 0.90 +0.97 |
++---+----------------+--------------+-------+-----------------------------------------------------------+
+| 2 | Sunrise City   | Neon Echo    | 2.92  | genre match (pop) +2.00; energy 0.82 vs target 0.90 +0.92 |
++---+----------------+--------------+-------+-----------------------------------------------------------+
+| 3 | Storm Runner   | Voltline     | 0.99  | energy 0.91 vs target 0.90 +0.99                          |
++---+----------------+--------------+-------+-----------------------------------------------------------+
+| 4 | Neon Cathedral | Voltline     | 0.95  | energy 0.95 vs target 0.90 +0.95                          |
++---+----------------+--------------+-------+-----------------------------------------------------------+
+| 5 | Broken Amps    | Static Youth | 0.94  | energy 0.96 vs target 0.90 +0.94                          |
++---+----------------+--------------+-------+-----------------------------------------------------------+
 
 === Unknown genre (bossa nova) ===
 Profile: {'genre': 'bossa nova', 'mood': 'relaxed', 'energy': 0.5}
-1. Island Drift by Sol Coast [reggae/relaxed] - 2.00
-   Because: mood match (relaxed) +1.0; energy 0.50 vs target 0.50 +1.00
-2. Coffee Shop Stories by Slow Stereo [jazz/relaxed] - 1.87
-   Because: mood match (relaxed) +1.0; energy 0.37 vs target 0.50 +0.87
-3. Velvet Hours by Mara Quinn [r&b/romantic] - 0.98
-   Because: energy 0.52 vs target 0.50 +0.98
-4. Dust Road Home by Cedar Line [country/nostalgic] - 0.95
-   Because: energy 0.55 vs target 0.50 +0.95
-5. Midnight Coding by LoRoom [lofi/chill] - 0.92
-   Because: energy 0.42 vs target 0.50 +0.92
++---+---------------------+-------------+-------+----------------------------------+
+| # | Title               | Artist      | Score | Reasons                          |
++---+---------------------+-------------+-------+----------------------------------+
+| 1 | Island Drift        | Sol Coast   | 2.00  | mood match (relaxed) +1.00;      |
+|   |                     |             |       | energy 0.50 vs target 0.50 +1.00 |
++---+---------------------+-------------+-------+----------------------------------+
+| 2 | Coffee Shop Stories | Slow Stereo | 1.87  | mood match (relaxed) +1.00;      |
+|   |                     |             |       | energy 0.37 vs target 0.50 +0.87 |
++---+---------------------+-------------+-------+----------------------------------+
+| 3 | Velvet Hours        | Mara Quinn  | 0.98  | energy 0.52 vs target 0.50 +0.98 |
++---+---------------------+-------------+-------+----------------------------------+
+| 4 | Dust Road Home      | Cedar Line  | 0.95  | energy 0.55 vs target 0.50 +0.95 |
++---+---------------------+-------------+-------+----------------------------------+
+| 5 | Midnight Coding     | LoRoom      | 0.92  | energy 0.42 vs target 0.50 +0.92 |
++---+---------------------+-------------+-------+----------------------------------+
 ```
 
 The same output is saved in [`outputs/sample_output.txt`](outputs/sample_output.txt).
@@ -188,29 +217,36 @@ Use this section to document the experiments you ran. For example:
 
 === High-Energy Pop (shifted weights) ===
 Profile: {'genre': 'pop', 'mood': 'happy', 'energy': 0.8}
-1. Sunrise City by Neon Echo [pop/happy] - 3.96
-   Because: genre match (pop) +1.0; mood match (happy) +1.0; energy 0.82 vs target 0.80 +1.96
-2. Rooftop Lights by Indigo Parade [indie pop/happy] - 2.92
-   Because: mood match (happy) +1.0; energy 0.76 vs target 0.80 +1.92
-3. Glass Skyline by Neon Echo [synthwave/happy] - 2.80
-   Because: mood match (happy) +1.0; energy 0.70 vs target 0.80 +1.80
-4. Gym Hero by Max Pulse [pop/intense] - 2.74
-   Because: genre match (pop) +1.0; energy 0.93 vs target 0.80 +1.74
-5. Concrete Bars by Kilo Tide [hip hop/confident] - 1.96
-   Because: energy 0.78 vs target 0.80 +1.96
++---+----------------+---------------+-------+------------------------------------------------------------+
+| # | Title          | Artist        | Score | Reasons                                                    |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 1 | Sunrise City   | Neon Echo     | 3.96  | genre match (pop) +1.00; mood match (happy) +1.00;         |
+|   |                |               |       | energy 0.82 vs target 0.80 +1.96                           |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 2 | Rooftop Lights | Indigo Parade | 2.92  | mood match (happy) +1.00; energy 0.76 vs target 0.80 +1.92 |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 3 | Glass Skyline  | Neon Echo     | 2.80  | mood match (happy) +1.00; energy 0.70 vs target 0.80 +1.80 |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 4 | Gym Hero       | Max Pulse     | 2.74  | genre match (pop) +1.00; energy 0.93 vs target 0.80 +1.74  |
++---+----------------+---------------+-------+------------------------------------------------------------+
+| 5 | Concrete Bars  | Kilo Tide     | 1.96  | energy 0.78 vs target 0.80 +1.96                           |
++---+----------------+---------------+-------+------------------------------------------------------------+
 
 === Conflicted (classical + angry + max energy) (shifted weights) ===
 Profile: {'genre': 'classical', 'mood': 'angry', 'energy': 0.95}
-1. Broken Amps by Static Youth [punk/angry] - 2.98
-   Because: mood match (angry) +1.0; energy 0.96 vs target 0.95 +1.98
-2. Neon Cathedral by Voltline [edm/euphoric] - 2.00
-   Because: energy 0.95 vs target 0.95 +2.00
-3. Gym Hero by Max Pulse [pop/intense] - 1.96
-   Because: energy 0.93 vs target 0.95 +1.96
-4. Storm Runner by Voltline [rock/intense] - 1.92
-   Because: energy 0.91 vs target 0.95 +1.92
-5. Sunrise City by Neon Echo [pop/happy] - 1.74
-   Because: energy 0.82 vs target 0.95 +1.74
++---+----------------+--------------+-------+------------------------------------------------------------+
+| # | Title          | Artist       | Score | Reasons                                                    |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 1 | Broken Amps    | Static Youth | 2.98  | mood match (angry) +1.00; energy 0.96 vs target 0.95 +1.98 |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 2 | Neon Cathedral | Voltline     | 2.00  | energy 0.95 vs target 0.95 +2.00                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 3 | Gym Hero       | Max Pulse    | 1.96  | energy 0.93 vs target 0.95 +1.96                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 4 | Storm Runner   | Voltline     | 1.92  | energy 0.91 vs target 0.95 +1.92                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
+| 5 | Sunrise City   | Neon Echo    | 1.74  | energy 0.82 vs target 0.95 +1.74                           |
++---+----------------+--------------+-------+------------------------------------------------------------+
 ```
 
 **Profiles tested:** High-Energy Pop, Chill Lofi, Deep Intense Rock, plus three adversarial ones: classical + angry + energy 0.95, pop + sad + energy 0.9, and an unknown genre (bossa nova).
@@ -225,6 +261,19 @@ Profile: {'genre': 'classical', 'mood': 'angry', 'energy': 0.95}
 - Sad + high energy: there is no sad song in the catalog, so the mood preference was silently ignored and the pop genre bonus decided everything.
 - Was the shift "more accurate"? For the conflicted profile, yes. For plain pop, it was mostly just different. Genre is a weak proxy for taste but energy alone is too, so neither weighting is clearly right.
 - Not tried yet: scoring tempo or valence.
+
+---
+
+## Optional Extensions
+
+All four extensions are implemented; run `python -m src.main` to see each one at the bottom of the output (also in [`outputs/sample_output.txt`](outputs/sample_output.txt)).
+
+1. **Advanced song features.** `data/songs.csv` has 5 new columns: `popularity` (0-100), `release_decade`, `mood_tags` (pipe-separated, e.g. `nostalgic|neon|driving`), `language` and `explicit`. Optional user prefs `popularity`, `decade`, `tags`, `language` and `allow_explicit` add or remove points (decade: full credit for the same decade, half for adjacent; tags: share of the user's tags matched; explicit songs lose 1.0 point if the user says no explicit).
+2. **Multiple scoring modes.** `MODES` in `src/recommender.py` holds `genre_first` (default), `mood_first` and `energy_focused`. Call `recommend_songs(prefs, songs, mode="mood_first")`. It is a Strategy pattern: the scoring rule is shared and each mode only supplies its weights. For the High-Energy Pop profile, `genre_first` ranks Gym Hero #2, while `mood_first` and `energy_focused` push it to #4 behind the happy songs.
+3. **Diversity penalty.** `recommend_songs(..., diversity=True)` picks songs greedily and subtracts 1.0 for each song by the same artist and 0.5 for each song of the same genre already chosen. For Chill Lofi it breaks up the run of LoRoom tracks (see the output). The penalty appears in each song's reasons.
+4. **Visual summary table.** Output uses `format_table()`, a plain-ASCII table with title, artist, score and the wrapped reasons. I used simple formatting instead of `tabulate` so there is no new dependency.
+
+AI workflow notes for extensions 1 and 2 are in [`ai_interactions.md`](ai_interactions.md).
 
 ---
 

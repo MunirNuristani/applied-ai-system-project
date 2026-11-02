@@ -59,3 +59,47 @@ def test_explain_recommendation_returns_non_empty_string():
     explanation = rec.explain_recommendation(user, song)
     assert isinstance(explanation, str)
     assert explanation.strip() != ""
+
+
+# --- Extension tests -------------------------------------------------------
+from src.recommender import load_songs, score_song, recommend_songs, format_table, MODES
+
+
+def _songs():
+    return load_songs("data/songs.csv")
+
+
+def test_load_songs_parses_extended_columns():
+    s = _songs()[0]
+    assert isinstance(s["popularity"], int) and isinstance(s["energy"], float)
+    assert "|" in s["mood_tags"]
+
+
+def test_extended_attributes_affect_score_and_explicit_penalty():
+    song = next(s for s in _songs() if s["explicit"] == 1)
+    base, _ = score_song({"genre": song["genre"]}, song)
+    penalised, reasons = score_song({"genre": song["genre"], "allow_explicit": False}, song)
+    assert penalised < base and any("explicit" in r for r in reasons)
+    _, r = score_song({"tags": [song["mood_tags"].split("|")[0]]}, song)
+    assert any("tag match" in x for x in r)
+
+
+def test_modes_change_the_ranking():
+    prefs = {"genre": "classical", "mood": "angry", "energy": 0.95}
+    genre_first = recommend_songs(prefs, _songs(), 1, mode="genre_first")[0][0]["genre"]
+    energy_first = recommend_songs(prefs, _songs(), 1, mode="energy_focused")[0][0]["genre"]
+    assert genre_first == "classical" and energy_first != "classical"
+    assert set(MODES) == {"genre_first", "mood_first", "energy_focused"}
+
+
+def test_diversity_penalty_reduces_repeat_artists():
+    prefs = {"genre": "lofi", "mood": "chill", "energy": 0.4}
+    artists = lambda res: [s["artist"] for s, _, _ in res]
+    plain = artists(recommend_songs(prefs, _songs(), 4))
+    diverse = artists(recommend_songs(prefs, _songs(), 4, diversity=True))
+    assert len(set(diverse)) > len(set(plain))
+
+
+def test_table_includes_reasons():
+    table = format_table(recommend_songs({"genre": "pop"}, _songs(), 2))
+    assert "genre match" in table and table.count("+---") >= 3

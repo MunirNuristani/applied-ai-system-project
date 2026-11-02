@@ -1,21 +1,21 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
-11,Dust Road Home,Cedar Line,country,nostalgic,0.55,98,0.62,0.57,0.65
-12,Neon Cathedral,Voltline,edm,euphoric,0.95,128,0.80,0.90,0.04
-13,Velvet Hours,Mara Quinn,r&b,romantic,0.52,88,0.66,0.74,0.40
-14,Concrete Bars,Kilo Tide,hip hop,confident,0.78,94,0.55,0.85,0.12
-15,Moonlit Sonata,Elise Arden,classical,peaceful,0.18,66,0.40,0.22,0.97
-16,Broken Amps,Static Youth,punk,angry,0.96,171,0.52,0.50,0.03
-17,Porch Light,Paper Lanterns,folk,melancholy,0.30,84,0.35,0.45,0.93
-18,Island Drift,Sol Coast,reggae,relaxed,0.50,82,0.78,0.76,0.48
-19,Glass Skyline,Neon Echo,synthwave,happy,0.70,114,0.72,0.78,0.20
-20,Afterhours Haze,LoRoom,lofi,moody,0.38,75,0.45,0.60,0.74
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,mood_tags,language,explicit
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,88,2020,uplifting|bright|sunny,english,0
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,61,2010,mellow|study|dreamy,instrumental,0
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,72,2010,aggressive|driving|adrenaline,english,0
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,55,2020,rainy|mellow|cozy,instrumental,0
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,90,2020,workout|aggressive|bright,english,1
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,40,2010,dreamy|spacey|calm,instrumental,0
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,48,1990,cozy|warm|smoky,english,0
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,66,1980,nostalgic|driving|neon,english,0
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,58,2020,study|mellow|calm,instrumental,0
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,77,2020,uplifting|sunny|breezy,english,0
+11,Dust Road Home,Cedar Line,country,nostalgic,0.55,98,0.62,0.57,0.65,63,2000,nostalgic|warm|cozy,english,0
+12,Neon Cathedral,Voltline,edm,euphoric,0.95,128,0.80,0.90,0.04,93,2020,euphoric|aggressive|bright,english,0
+13,Velvet Hours,Mara Quinn,r&b,romantic,0.52,88,0.66,0.74,0.40,70,2010,romantic|warm|smoky,english,0
+14,Concrete Bars,Kilo Tide,hip hop,confident,0.78,94,0.55,0.85,0.12,84,2020,confident|aggressive|driving,english,1
+15,Moonlit Sonata,Elise Arden,classical,peaceful,0.18,66,0.40,0.22,0.97,52,1800,calm|dreamy|peaceful,instrumental,0
+16,Broken Amps,Static Youth,punk,angry,0.96,171,0.52,0.50,0.03,51,1990,aggressive|angry|adrenaline,english,1
+17,Porch Light,Paper Lanterns,folk,melancholy,0.30,84,0.35,0.45,0.93,45,2010,melancholy|cozy|rainy,english,0
+18,Island Drift,Sol Coast,reggae,relaxed,0.50,82,0.78,0.76,0.48,69,1980,sunny|breezy|warm,english,0
+19,Glass Skyline,Neon Echo,synthwave,happy,0.70,114,0.72,0.78,0.20,74,2020,nostalgic|neon|uplifting,english,0
+20,Afterhours Haze,LoRoom,lofi,moody,0.38,75,0.45,0.60,0.74,50,2020,rainy|mellow|dreamy,instrumental,0
