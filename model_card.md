@@ -1,111 +1,86 @@
 # 🎧 Model Card: Music Recommender Simulation
 
-## 1. Model Name  
+## 1. Model Name
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
-
----
-
-## 2. Intended Use  
-
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+**VibeFinder 1.0**
 
 ---
 
-## 3. How the Model Works  
+## 2. Goal / Task
 
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+VibeFinder suggests the top 5 songs from a small catalog. It predicts which songs a user will like, based on a favorite genre, a favorite mood, a target energy level and an optional acoustic preference.
 
 ---
 
-## 4. Data  
+## 3. Data Used
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+- 20 songs in `data/songs.csv`: the 10 starter songs plus 10 I added (country, EDM, R&B, hip hop, classical, punk, folk, reggae, a happy synthwave song and a moody lofi song).
+- Each song has: genre, mood, energy, tempo, valence, danceability, acousticness.
+- Only genre, mood, energy and acousticness are used in scoring.
+- Limits: lofi has 4 songs, pop and synthwave 2 each, and most other genres have just 1. There is no sad song. There are no lyrics, languages, years or popularity data.
 
 ---
 
-## 5. Strengths  
+## 4. Algorithm Summary
 
-Where does your system seem to work well  
+Every song gets points for how well it fits the user:
 
-Prompts:  
+- Same genre: +2 points.
+- Same mood: +1 point.
+- Energy: up to +1 point. The closer the song's energy is to the target, the more points. A song that is too quiet is penalized the same as one that is too loud.
+- Acoustic: up to +0.5 point, for acoustic songs if the user likes them, or non-acoustic songs if not.
 
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
-
----
-
-## 6. Limitations and Bias 
-
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+Then all songs are sorted from highest to lowest score and the top 5 are shown, each with the reasons for its score. We need two steps because one rule judges a single song, and a second rule compares all the songs to pick the best. The starter code just returned the first songs in the file.
 
 ---
 
-## 7. Evaluation  
+## 5. Observed Behavior / Biases
 
-How you checked whether the recommender behaved as expected. 
-
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
+Genre is worth the most points, so it can beat a song that fits the user's mood and energy much better. For example, a user who wants angry, very high-energy music but whose favorite genre is classical gets a quiet classical piece at #1 (score 2.23). It scored only 0.23 on energy, but the genre bonus carried it. Because most genres have only one song, the system also gives lofi fans a full list of good matches, while fans of other genres get one good match followed by songs that only match on energy. Moods that do not exist in the catalog (like "sad") are silently ignored.
 
 ---
 
-## 8. Future Work  
+## 6. Evaluation Process
 
-Ideas for how you would improve the model next.  
+I ran six profiles and looked at the top 5 for each. I checked whether the obvious best song came first and whether the reasons made sense. Then I ran an experiment: genre weight halved (2.0 to 1.0) and energy weight doubled (1.0 to 2.0). Full outputs are in the README and `outputs/sample_output.txt`. Two automated tests (`pytest`) check the ranking order and that explanations are not empty.
 
-Prompts:  
+**Profile comparisons:**
 
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+- **High-Energy Pop vs Chill Lofi:** Pop gives bright, fast songs (Sunrise City, 0.82 energy). Lofi gives slow, acoustic ones (Library Rain, 0.35 energy). The energy target and genre together pull the lists to opposite ends of the catalog, which is what we want.
+- **High-Energy Pop vs Deep Intense Rock:** Both want high energy, so Gym Hero shows up in both. In Pop it is #2 because of the genre match. In Rock it is #2 because of the "intense" mood match. Rock has only one rock song, so after #1 the list is just high-energy songs of any genre.
+- **Chill Lofi vs Deep Intense Rock:** Almost no overlap. They are opposites on energy and acousticness, and the lists reflect that.
+- **Deep Intense Rock vs Classical + angry (conflicted):** Both want very high energy. Rock puts its genre match first. The conflicted profile instead gets a quiet classical song at #1, because genre outranks energy. That is the clearest sign of the genre bias.
+- **Conflicted (sad + max energy) vs High-Energy Pop:** Both are "pop, high energy" but this one wants "sad". No song is sad, so the results are the same pop songs minus the happy-mood boost. The user's mood was ignored, and the system did not tell them.
+- **Unknown genre (bossa nova) vs Chill Lofi:** Lofi has many matching songs. Bossa nova has none, so the ranking falls back to mood and energy (relaxed reggae and jazz). It degrades sensibly but gives a less personal list.
+
+**Why does Gym Hero keep showing up for people who want "Happy Pop"?** Gym Hero is a pop song with very high energy (0.93). The user asked for pop, so it gets the big genre bonus. Its energy is close to what they asked for, so it gets almost full energy points. It is not happy (it is "intense"), but missing the mood bonus only costs 1 point, and the genre bonus is worth 2. So an energetic pop workout song still beats happy songs that are not pop. When I shifted weight from genre to energy, Gym Hero dropped from #2 to #4 and the happy songs moved up.
+
+**What surprised me:** one weight change flipped the conflicted profile completely, from a calm classical song to an angry punk song. The punk result matches what the user asked for, but it only "felt" right because I already knew what I wanted. The change was different for plain pop, not clearly better.
 
 ---
 
-## 9. Personal Reflection  
+## 7. Intended Use and Non-Intended Use
 
-A few sentences about your experience.  
+**Intended:** classroom exploration of how scoring and ranking can turn data into recommendations, with explanations a person can read.
 
-Prompts:  
+**Not intended:** real music discovery for real listeners, or any decision that matters. The catalog is tiny, hand-picked, and has no behavior data from real users. It should not be used to judge anyone's taste or to decide what artists get promoted.
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+---
+
+## 8. Ideas for Improvement
+
+1. Score tempo and valence too, and treat similar genres and moods as partly matching (indie pop is close to pop; chill is close to relaxed).
+2. Add a diversity penalty so one artist or genre cannot fill the whole top 5.
+3. Tell the user when a preference (like "sad") can't be matched, and grow the catalog so each genre has more than one or two songs.
+
+---
+
+## 9. Personal Reflection
+
+**Biggest learning moment:** seeing one weight change flip the top result for the conflicted profile. It showed me that the "AI" here is really my own choices about what matters, written as numbers.
+
+**How AI helped, and when I double-checked it:** Claude Code wrote the first version of the scoring code, the extra songs and the draft documents quickly. I did not take its word for what the system does. I ran the code and read the actual outputs, and I wrote the profile comparisons and the Gym Hero explanation from those outputs. Anything described in this card was checked against a real run. I also noticed the AI could not read the course instructions behind a login, so I had to supply them myself.
+
+**What surprised me:** how much a few if-statements and an energy gap "feel" like a real recommendation, especially with reasons printed next to each score. Yet the sad-mood case shows how easily it can be wrong without any sign of it.
+
+**What I would try next:** add tempo and valence, a diversity penalty, and more songs per genre. Then I would compare against a collaborative-filtering approach using fake "listening history" for several users.
