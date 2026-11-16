@@ -1,0 +1,18 @@
+Eval mode: offline (deterministic)
+PASS  conf=1.00  upbeat pop workout  (ok, parse=rules)
+PASS  conf=0.80  chill lofi study  (ok, parse=rules)
+PASS  conf=1.00  angry punk, high energy  (ok, parse=rules)
+PASS  conf=0.80  'indie pop' is not read as 'pop'  (ok, parse=rules)
+PASS  conf=0.45  mixed case + emoji  (ok, parse=rules)
+PASS  conf=0.80  country road trip  (ok, parse=rules)
+PASS  conf=0.35  unknown genre degrades to mood-only  (ok, parse=rules)
+PASS  conf=0.45  negated genre is not requested  (ok, parse=rules)
+PASS  conf=0.70  negated mood is not requested  (ok, parse=rules)
+PASS  conf=0.55  energy 150% is clamped + logged  (ok, parse=rules)
+PASS  conf=  -   empty input rejected  (rejected, parse=-)
+PASS  conf=  -   whitespace-only rejected  (rejected, parse=-)
+PASS  conf=  -   5000-char input rejected  (rejected, parse=-)
+PASS  conf=  -   gibberish abstains  (abstained, parse=rules)
+PASS  conf=  -   prompt injection abstains  (abstained, parse=rules)
+
+Passed 15/15 | mean confidence on answered requests: 0.69

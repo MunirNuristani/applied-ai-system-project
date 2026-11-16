@@ -66,7 +66,7 @@ from src.recommender import load_songs, score_song, recommend_songs, format_tabl
 
 
 def _songs():
-    return load_songs("data/songs.csv")
+    return load_songs("data/songs_sample.csv")
 
 
 def test_load_songs_parses_extended_columns():

@@ -1,0 +1,56 @@
+{
+  "01a9187dd9c7707cabaeda72fedba5462f2436048ef42d066e828258573ecb3f": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "explain",
+    "recorded_at": "2026-11-15T03:14:59+00:00",
+    "response": "{\n  \"2\": \"Midnight Coding fits well because of a genre match (lofi), a mood match (chill), an energy close to the target, and a matching study tag. Lofi features soft, slightly dusty beats with mellow melodies, designed for studying and background listening.\",\n  \"4\": \"Library Rain is recommended due to a genre match (lofi), a mood match (chill), and an energy level close to the target of 0.30. It aligns with lofi music, which offers soft, slightly dusty beats with mellow melodies for background listening.\",\n  \"6\": \"Spacewalk Thoughts was selected based on a chill mood match and an energy score near the target. The chill mood provides low-pressure, easygoing, background-friendly music at low to mid energy.\",\n  \"9\": \"Focus Flow matches the request through a lofi genre match, an energy score near the target, and a study tag match. Lofi consists of soft, slightly dusty beats with mellow melodies designed for studying.\",\n  \"7\": \"Coffee Shop Stories fits the recommendation due to an energy level close to the target of 0.30, aligning with low-to-mid energy background-friendly needs.\"\n}"
+  },
+  "1cb0ec2cd99dcfd92166e277e02815323b3a14a4a921d18c0b0dd1de5ac8eb9f": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "suggest",
+    "recorded_at": "2026-11-16T04:16:43+00:00",
+    "response": "{\"songs\": [{\"title\": \"All The Time\", \"artist\": \"Jeremih\", \"reason\": \"This track delivers a warm, intimate atmosphere driven by smooth vocals and a seductive groove.\"}, {\"title\": \"Reignite\", \"artist\": \"Knox Brown x Gallant\", \"reason\": \"It features lush harmonies and a tender melodic delivery that perfectly captures a deeply affectionate mood.\"}, {\"title\": \"Thinking Out Loud\", \"artist\": \"Ed Sheeran\", \"reason\": \"A timeless acoustic ballad that expresses enduring devotion with gentle guitar strumming and heartfelt lyrics.\"}, {\"title\": \"Beyond\", \"artist\": \"Leon Bridges\", \"reason\": \"This soulful tune offers a sweet, retro-inspired serenade about finding the ultimate lifelong partner.\"}, {\"title\": \"Adorn\", \"artist\": \"Miguel\", \"reason\": \"A silky contemporary rhythm and blues classic that creates a deeply personal and loving ambiance.\"}]}"
+  },
+  "44fde577bd3990c3b6dea6b13764d16dc6fbef74a7b6686021d89f08e68d7ac8": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "suggest",
+    "recorded_at": "2026-11-16T04:19:54+00:00",
+    "response": "{\"songs\": [{\"title\": \"Don't Stop Me Now\", \"artist\": \"Queen\", \"reason\": \"This track delivers a relentless, upbeat tempo that immediately elevates your heart rate.\"}, {\"title\": \"Stronger\", \"artist\": \"Kanye West\", \"reason\": \"A pulsating electronic beat and driving rhythm make this an ultimate workout anthem.\"}, {\"title\": \"Uptown Funk\", \"artist\": \"Mark Ronson\", \"reason\": \"The vibrant brass section and infectious groove guarantee an instant burst of vitality.\"}, {\"title\": \"Can't Hold Us\", \"artist\": \"Macklemore & Ryan Lewis\", \"reason\": \"Rapid-fire delivery and a soaring hook create an unstoppable surge of adrenaline.\"}, {\"title\": \"Levels\", \"artist\": \"Avicii\", \"reason\": \"Luminous synth melodies and a massive drop provide a pure electronic rush.\"}]}"
+  },
+  "4987d0bc1db24385e08bdbb9324935bb145f788b53e174ef50ae486fb1f58146": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "explain",
+    "recorded_at": "2026-11-15T03:12:54+00:00",
+    "response": "{\n  \"16\": \"Broken Amps is a punk song that fits the angry mood and high energy request. According to the notes, punk features fast, short, loud songs with raw guitars, very high energy, and low acousticness, while the angry mood is aggressive and confrontational.\",\n  \"5\": \"Gym Hero matches the high energy target with an energy score of 0.93 and provides an acoustic fit. The notes describe intense music as driving and powerful with high energy and a fast tempo.\",\n  \"3\": \"Storm Runner aligns with the high energy target at 0.91 and has a positive acoustic fit. The notes note that intense music is driving and powerful with high energy and an often fast tempo.\",\n  \"14\": \"Concrete Bars achieves an energy score of 0.78 toward the target and includes an acoustic fit. The notes state that hip hop is rhythm-forward with energy ranging from laid back to aggressive.\",\n  \"8\": \"Night Drive Loop meets the energy target with a score of 0.75 and an acoustic fit. It brings a moody, driving feel based on the provided song metrics.\"\n}"
+  },
+  "595b80b124d63993cf0504f462acb355f9d7995628e8d0ec1996ceb104e69159": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "parse",
+    "recorded_at": "2026-11-15T03:14:06+00:00",
+    "response": "{\n  \"genre\": \"lofi\",\n  \"mood\": \"chill\",\n  \"energy\": 0.3,\n  \"likes_acoustic\": null,\n  \"tags\": [\n    \"study\",\n    \"beats\"\n  ],\n  \"confidence\": 1.0\n}"
+  },
+  "5a4d8e79cad34b507742b314b400b22ddb2df7f33ba02815efbee538220fd875": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "explain",
+    "recorded_at": "2026-11-15T03:10:25+00:00",
+    "response": "{\n  \"6\": \"This song fits because of a genre match for ambient and a mood match for chill, along with an energy of 0.28 compared to the target 0.20. Ambient music is slow, textural music built from sustained sounds rather than hooks, usually low energy.\",\n  \"4\": \"This song fits due to a mood match for chill, a tag match for mellow, and an energy of 0.35 close to the target 0.20. Chill music is low-pressure and easygoing background-friendly music at low to mid energy.\",\n  \"2\": \"This song matches due to a mood match for chill, a tag match for mellow, and an energy of 0.42 against the target 0.20, though it received a diversity penalty. Chill music is low-pressure and easygoing background-friendly music at low to mid energy.\",\n  \"15\": \"This song is recommended based on its energy of 0.18 aligning well with the target 0.20. Classical genre features orchestral or solo-instrument compositions with wide dynamic range, typically highly acoustic and rarely tied to a single mood.\",\n  \"7\": \"This song fits because its energy of 0.37 is close to the target 0.20. Jazz music is improvisation-friendly music with swung rhythm and rich harmony, commonly relaxed to mid energy and fairly acoustic.\"\n}"
+  },
+  "6eb6767571b2411d1a5d4beda779a422179c70fc8c08e725b607080b78c5e37a": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "parse",
+    "recorded_at": "2026-11-15T03:12:00+00:00",
+    "response": "{\n  \"genre\": \"punk\",\n  \"mood\": \"angry\",\n  \"energy\": 0.9,\n  \"likes_acoustic\": false,\n  \"tags\": [\n    \"angry\",\n    \"punk\",\n    \"high energy\"\n  ],\n  \"confidence\": 1.0\n}"
+  },
+  "8a98ccf311adec01ef99128fa493bea385aa78103252b028f8d7cc664748cc2b": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "parse",
+    "recorded_at": "2026-11-15T03:09:32+00:00",
+    "response": "{\n  \"genre\": \"ambient\",\n  \"mood\": \"chill\",\n  \"energy\": 0.2,\n  \"likes_acoustic\": null,\n  \"tags\": [\n    \"mellow\",\n    \"rainy evening\",\n    \"no vocals\",\n    \"instrumental\"\n  ],\n  \"confidence\": 0.9\n}"
+  },
+  "fb876c6b0a6b882a89227b6a3fc1c3429e511e0a68c64c82041ec58f423b034f": {
+    "model": "gemini-3.5-flash-lite",
+    "purpose": "parse",
+    "recorded_at": "2026-11-15T03:21:55+00:00",
+    "response": "{\n  \"genre\": null,\n  \"mood\": \"romantic\",\n  \"energy\": null,\n  \"likes_acoustic\": null,\n  \"tags\": [\n    \"dinner\"\n  ],\n  \"confidence\": 0.9\n}"
+  }
+}

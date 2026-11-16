@@ -13,3 +13,8 @@ venv/
 
 # Pytest cache
 .pytest_cache/
+
+# Secrets and local runtime state
+.env
+logs/app.log
+logs/llm_usage.json

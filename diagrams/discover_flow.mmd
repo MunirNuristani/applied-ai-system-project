@@ -1,0 +1,22 @@
+flowchart TD
+    U([User types a mood]) --> IG{{"Input guardrail: empty, too long, control characters"}}
+    IG -- rejected --> HR([User rephrases])
+    IG -- ok --> SW{"Use Gemini?"}
+    SW -- no --> LOC
+    SW -- yes --> PR["Rule-based profile + profile guardrail"]
+    PR --> RT["Retrieval: catalog candidates (weighted scorer) + genre/mood notes (RAG)"]
+    RT --> GM["Gemini suggests songs, grounded on the retrieved context (one call)"]
+    GM <--> LLM["LLM client: replay cache, daily budget, timeout"]
+    GM -- unavailable or bad JSON --> LOC
+    GM --> OG{{"Output guardrail: schema, size, duplicates, unverifiable reasons"}}
+    OG --> DZ{"Found on Deezer?"}
+    DZ -- "no, dropped" --> OG
+    DZ -- "none left" --> LOC
+    DZ -- yes --> PL
+    LOC["Local list: rule parser + scorer + template explanations over data/songs.csv"] --> PL
+    PL["App downloads the 30-second Deezer preview and plays it in the page"] --> OUT([User listens])
+    LG[("logs/app.log")]
+    IG -.-> LG
+    OG -.-> LG
+    T["Testing: pytest with fake Gemini and fake Deezer, eval.py"]
+    T -.-> OG

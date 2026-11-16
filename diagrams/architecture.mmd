@@ -1,0 +1,25 @@
+flowchart TD
+    U([User request]) --> IG{{"Input guardrail: empty, too long, control characters"}}
+    IG -- rejected --> HR([Human rephrases the request])
+    IG -- ok --> PA["Parser: Gemini returns a JSON profile, else rule-based fallback"]
+    PA <--> LLM["LLM client: replay cache, daily call budget, Gemini API"]
+    PA --> PG{{"Profile guardrail: check against catalog, clamp energy, drop unknown fields"}}
+    PG --> CF{"Confidence at least 0.3?"}
+    CF -- no --> AB([Abstain: ask the human for a genre or mood])
+    CF -- yes --> RS["Retriever 1: weighted scorer over data/songs.csv"]
+    RS --> RN["Retriever 2: genre and mood notes from docs/music_notes.md"]
+    RN --> EX["Explainer: Gemini writes explanations from retrieved data only"]
+    EX <--> LLM
+    EX --> OG{{"Output guardrail: no other songs or artists, no invented numbers"}}
+    OG -- pass --> OUT([Ranked songs, explanations, confidence])
+    OG -- fail or LLM unavailable --> TP["Template explanation built from score reasons"]
+    TP --> OUT
+    OUT --> HU([Human reviews the results])
+    LG[("logs/app.log")]
+    IG -.-> LG
+    PG -.-> LG
+    OG -.-> LG
+    T["Testing: pytest with a fake LLM, eval.py with 15 predefined cases"]
+    T -.-> IG
+    T -.-> PG
+    T -.-> OG
